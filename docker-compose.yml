@@ -1,0 +1,12 @@
+version: '3.7'
+#networks:
+#  rionet:
+#    external: true
+
+services:
+  frontend:
+    container_name : frontend
+    image: rioprayogo/frontend:v.2
+    stdin_open: true
+    ports:
+      - "3000:3000"
