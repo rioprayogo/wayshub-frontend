@@ -9,7 +9,7 @@ pipeline{
         stage ('docker delete & git pull'){
             steps{
                 sshagent([secret]) {
-                    sh """ssh -o StrictHostKeyChecking=no ${app} << EOF
+                    sh """ssh -o StrictHostKeyChecking=no ${server} << EOF
                     cd ${directory}
                     docker-compose down
                     docker system prune -f
@@ -22,9 +22,9 @@ pipeline{
         stage ('docker compose'){
             steps{
                 sshagent([secret]) {
-                    sh """ssh -o StrictHostKeyChecking=no ${app} << EOF
+                    sh """ssh -o StrictHostKeyChecking=no ${server} << EOF
                     cd ${directory}
-                    docker build -t rioprayogo/frontend:v.2 .
+                    docker build -t rioprayogo/frontend:v.3 .
                     exit
                     EOF"""
                 }
@@ -33,7 +33,7 @@ pipeline{
         stage ('docker up'){
             steps{
                 sshagent([secret]) {
-                    sh """ssh -o StrictHostKeyChecking=no ${app} << EOF
+                    sh """ssh -o StrictHostKeyChecking=no ${server} << EOF
                     cd ${directory}
                     docker-compose up -d
                     exit
