@@ -24,7 +24,7 @@ pipeline{
                 sshagent([secret]) {
                     sh """ssh -o StrictHostKeyChecking=no ${app-rio} << EOF
                     cd ${directory}
-                    docker build -t rioprayogo/frontend:v.3 .
+                    docker build -t rioprayogo/frontend:v.2 .
                     exit
                     EOF"""
                 }
